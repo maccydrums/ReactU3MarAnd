@@ -4,7 +4,7 @@ import CardComponent from './CardComponent';
 import PropTypes from 'prop-types';
 import WithHTTPRequests from '../HOCS/WithHTTPRequests';
 
-//renderar SingleUserComponent som visar vilken user man har klickat på i Dashboard
+// renderar SingleUserComponent som visar vilken user man har klickat på i Dashboard
 function SingleUserComponent(props) {
 
   const [users, setUsers] = useState('');
@@ -13,6 +13,8 @@ function SingleUserComponent(props) {
   const city = ((users || {}).address || {}).city;
   const suite = ((users || {}).address || {}).suite;
 
+  // när jag började att pyssla med fetch så tyckte jag att det var smidigare med async & await, men det strulade lite när jag skulle ta emot params, så jag sket i det.
+  // får bara fram cast error och att det jag hämtar är undefined, förstår inte varför? lyckades ju hämta alla users innan jag la till
   // useEffect(() => {
   //   fetchUsers();
   // }, []);
@@ -23,6 +25,7 @@ function SingleUserComponent(props) {
   //   setUsers(users);
   // }
 
+  // använder hooks och useEffect för att hämta data från vår server
   useEffect(() => {
     const url = props.fetchSingleUser();
 

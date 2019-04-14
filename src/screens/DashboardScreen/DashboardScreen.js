@@ -13,13 +13,26 @@ class DashboardScreen extends Component {
   };
 }
 
-  //bildar en ny array med hjälp av concat-metoden
-  addUser = (event) => {
-    let userNames = this.state.users.concat(event);
-    this.setState({
-      users: userNames
-    })
-  }
+  //
+  addNewUser = (newUser, userEmail, username) => {
+      const newUserObject =
+      {
+        name:newUser,
+        username: username,
+        email: userEmail,
+        address: {
+          city: 'Växjö',
+          street:'Olausvägen 10B',
+          suite: '1509',
+          zipcode: "35922",
+          geo: {
+            lat: 0,
+             lng: 0
+            },
+           }
+      };
+      console.log(newUserObject);
+    }
 
   //tar bort sista namnet i listan med slice-metoden
   removeUser = () => {
@@ -54,7 +67,7 @@ class DashboardScreen extends Component {
           <input type="text" value={this.state.concatUsers} className="form-control" onChange={this.handleInput} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Lägg till ett namn..."/>
         </div>
         <div className="buttons">
-          <button type="button" className="btn btn-success" onClick={() => this.addUser(this.state.concatUsers)}>Add user</button>
+          <button type="button" className="btn btn-success" onClick={() => this.addNewUser}>Add user</button>
           <button type="button" className="btn btn-danger" onClick={() => this.removeUser()}>Remove user</button>
         </div>
       </CardComponent>

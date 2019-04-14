@@ -7,7 +7,7 @@ import LoginScreen from './screens/LoginScreen/LoginScreen';
 import CardComponent from './components/CardComponent';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-//returnerar CardComponent med en <h4> + info
+// returnerar CardComponent med en <h4> + info
 function User() {
   return (
     <div className = "wrapper">
@@ -18,6 +18,7 @@ function User() {
   );
 }
 
+// renderar NavBarComponent och hanterar all logik för routern
 class App extends Component {
 
   //skickar användaren vidare till /login

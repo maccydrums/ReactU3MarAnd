@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import '../App.css';
 import { NavLink } from 'react-router-dom';
 
-//Renderar en Navbar med tre länkar och hanterar all logik för React Router
+//Renderar en Navbar med tre länkar
 class NavBarComponent extends Component {
-
-
-
   render() {
     return (
         <div>
