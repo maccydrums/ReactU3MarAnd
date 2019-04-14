@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import WithHTTPRequests from '../HOCS/WithHTTPRequests';
 
 //funktion som tar emot users och color som props och renderar en li-tagg för varje namn som tas emot från vår lista med namn. Kollar även state på color och renderar antingen en svart eller röd färg.
 function UserComponent(props) {
 
   let color = props.color;
+  let fetchUsers = props.fetchUsers;
   const colorOne = '#000000';
   const colorTwo = '#ff0000';
 
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
+  //
+  // async function getUsers() {
+  //   const response = await fetch('http://api.softhouse.rocks/users');
+  //   const users = await response.json();
+  //   setUsers(users);
+  // }
 
-  async function getUsers() {
-    const response = await fetch('http://api.softhouse.rocks/users');
-    const users = await response.json();
-    setUsers(users);
-  }
+  useEffect(() => {
+    const url = props.fetchUsers();
+      url.then((response) => {
+        return response.json()
+      })
+      .then((newUser) => {
+        const user = newUser
+        setUsers(user);
+      });
+    }, []);
 
 
   return (
-    <Route>
     <ul style = {{padding: 0}}>
       {users.map((user, id) =>
         <li key={id} className ="list-group-item">
@@ -33,7 +45,6 @@ function UserComponent(props) {
         </li>
       )}
     </ul>
-    </Route>
   )
 }
 
@@ -43,4 +54,4 @@ UserComponent.propTypes = {
   name: PropTypes.string
 }
 
-export default UserComponent;
+export default WithHTTPRequests(UserComponent);

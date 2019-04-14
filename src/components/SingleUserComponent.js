@@ -2,9 +2,10 @@ import React, { useState, useEffect, Fragment } from 'react';
 import '../App.css';
 import CardComponent from './CardComponent';
 import PropTypes from 'prop-types';
+import WithHTTPRequests from '../HOCS/WithHTTPRequests';
 
 //renderar SingleUserComponent som visar vilken user man har klickat på i Dashboard
-export default function SingleUserComponent({singleUser}) {
+function SingleUserComponent(props) {
 
   const [users, setUsers] = useState('');
 
@@ -23,17 +24,16 @@ export default function SingleUserComponent({singleUser}) {
   // }
 
   useEffect(() => {
-      {singleUser &&
-      fetch(`http://api.softhouse.rocks/users/${singleUser}`)
-      .then((response) => {
-        return response.json()
-      })
-      .then((newUser) => {
-        const user = newUser
-        setUsers(user);
-      });
-      }
-    }, []);
+    const url = props.fetchSingleUser();
+
+    url.then((response) => {
+      return response.json()
+    })
+    .then((newUser) => {
+      const user = newUser
+      setUsers(user);
+    });
+  }, []);
 
 
   const showAddress = () => {
@@ -48,7 +48,7 @@ export default function SingleUserComponent({singleUser}) {
   return (
     <div className = "wrapper">
       <CardComponent showAddress = {showAddress()}>
-        <img src = {'https://static.businessinsider.com/image/51dd6b0ceab8eaa223000013/image.jpg'} alt = 'header'/>
+        <img src = {'http://blogs.discovermagazine.com/inkfish/files/2017/09/8696883646_cc332cc707_z.jpg'} alt = 'header'/>
         <h3>{users.username}</h3>
         <h4>{users.name}</h4>
         <h4 style = {{marginBottom: '25px'}}>{users.email}</h4>
@@ -56,6 +56,8 @@ export default function SingleUserComponent({singleUser}) {
     </div>
   );
 }
+
+export default WithHTTPRequests(SingleUserComponent);
 
 SingleUserComponent.propTypes = {
   history: PropTypes.object,
