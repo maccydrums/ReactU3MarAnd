@@ -1,0 +1,35 @@
+.cardWrapper {
+  width: 400px;
+  min-height: 195px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  box-shadow: 7px 10px 24px -14px rgba(0,0,0,0.75);
+  text-align: center;
+}
+
+.btn {
+  width: 130px;
+  text-align: center;
+  margin-left:auto;
+}
+
+p {
+  margin: 0px;
+}
+
+h4 {
+  font-size: 17px;
+  font-weight: normal;
+}
+
+img {
+  margin-bottom: 15px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
